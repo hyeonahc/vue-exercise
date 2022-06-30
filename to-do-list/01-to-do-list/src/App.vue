@@ -23,17 +23,15 @@ export default {
     return {
       title: '',
       newTitle: '',
-      todos: [
-        {
-          title: 'hello world',
-          id: nanoid(),
-        },
-      ],
+      todos: [],
       editMode: false,
     };
   },
   methods: {
     addTodo() {
+      if (!this.title.trim()) {
+        return;
+      }
       this.todos.push({
         title: this.title,
         id: nanoid(),
