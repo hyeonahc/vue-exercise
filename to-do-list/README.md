@@ -1,5 +1,9 @@
 # to do list 만드는 법
 
+## 나중에 캡슐화해주기
+
+- App.vue에서 시작하다 리스트 수정을 위해 li태그를 todoList.vue 컴포넌트화 시켜주기
+
 ### 1. 기본 골격과 데이터 만들기
 
 1. App.vue 컴포넌트에 input, ul, li 태그 만들기
@@ -16,8 +20,8 @@
 ### 3. 리스트 삭제, 수정해주는 UI 생성하기 (editMode 데이터, changeEditMode 메서드)
 
 1. li 태그 안에 수정 버튼, 삭제 버튼 만들어주기
-2. 수정 버튼을 눌렀을때 editMode: true일때 => 새로운 input, 확인 button 생성 / 수정, 삭제 button 사라짐
-3. 확인 버튼 눌렀을대 editMode: false일때 => 새로운 input, 확인 button 사라짐 / 수정, 삭제 button 생성
+2. 수정 버튼을 눌렀을때 editMode: true일때 => 새로운 input, 확인, 취소 button 생성 / 수정, 삭제 button 사라짐
+3. 확인 버튼 눌렀을때 editMode: false일때 => 새로운 input, 확인, 취소 button 사라짐 / 수정, 삭제 button 생성
 4. 삭제 버튼 눌렀을때 => 해당 리스트 사라짐
 
 ### 4. 리스트 삭제해주기 (deleteTodo 메서드)
@@ -43,3 +47,7 @@
 4. editTodo, deleteTodo 메서드 생성해주기
 5. editTodo와 deleteTodo 메서드는 상위 컴포넌트에 있는 데이터를 수정하므로 이벤트를 상속시켜주는 emit을 사용해준다
 6. editTodo는 상위 컴포넌트에 데이터 title을 넘겨주고 deleteTodo는 해당 객체 todo를 넘겨준다
+
+## 캡슐화 바로 해주기
+
+- App.vue, todoList.vue, Button.vue로 나누어서 바로 작업 시작해주기
