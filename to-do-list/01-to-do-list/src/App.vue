@@ -22,15 +22,27 @@ export default {
   data() {
     return {
       title: '',
-      todos: [
-        {
-          title: 'Hello World',
-          id: nanoid(),
-        },
-      ],
+      todos: [],
     };
   },
+  watch: {
+    todos: {
+      handler() {
+        this.saveTodos();
+      },
+      deep: true,
+    },
+  },
+  created() {
+    this.fetchTodos();
+  },
   methods: {
+    fetchTodos() {
+      this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+    },
+    saveTodos() {
+      localStorage.setItem('todos', JSON.stringify(this.todos));
+    },
     addTodo() {
       if (!this.title.trim()) {
         return;
