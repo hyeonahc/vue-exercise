@@ -1,26 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <input type="text" v-model="title" @keyup.enter="addTodo" />
+  <ul>
+    <li v-for="todo in todos" :key="todo.id">{{ todo.title }}</li>
+  </ul>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { nanoid } from 'nanoid';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      title: '',
+      todos: [],
+    };
+  },
+  methods: {
+    addTodo() {
+      this.todos.push({
+        title: this.title,
+        id: nanoid(),
+      });
+      this.title = '';
+    },
+  },
+};
 </script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
