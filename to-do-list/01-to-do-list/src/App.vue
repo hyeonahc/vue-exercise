@@ -5,7 +5,7 @@
       {{ todo.title }}
       <template v-if="!editMode">
         <button @click="changeMode">수정</button>
-        <button>삭제</button>
+        <button @click="deleteTodo(todo)">삭제</button>
       </template>
       <template v-else>
         <input type="text" v-model="newTitle" />
@@ -42,6 +42,10 @@ export default {
     },
     editTodo(todo) {
       todo.title = this.newTitle;
+    },
+    deleteTodo(todo) {
+      console.log(todo);
+      this.todos.splice(todo.index, 1);
     },
     changeMode() {
       this.editMode = !this.editMode;
