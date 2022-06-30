@@ -41,9 +41,9 @@ export default {
     editTodo(todo) {
       todo.title = this.newTitle;
     },
-    deleteTodo(todo) {
-      console.log(todo);
-      this.todos.splice(todo.index, 1);
+    deleteTodo(todoToDelete) {
+      const index = this.todos.findIndex(todo => todo.id === todoToDelete.id);
+      this.todos.splice(index, 1);
     },
     changeMode() {
       this.editMode = !this.editMode;
