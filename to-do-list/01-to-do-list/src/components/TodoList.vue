@@ -2,8 +2,8 @@
   <li>
     <template v-if="!editMode">
       {{ todo.title }}
-      <button @click.stop="onEditMode">수정</button>
-      <button @click="deleteTodo()">삭제</button>
+      <TheButton color="orange" @click.stop="onEditMode">수정</TheButton>
+      <TheButton color="danger" @click="deleteTodo()">삭제</TheButton>
     </template>
     <template v-else>
       <div @click.stop>
@@ -15,15 +15,22 @@
           @keydown.enter="offEditMode(), editTodo()"
           @keydown.esc="offEditMode"
         />
-        <button @click="offEditMode(), editTodo()">확인</button>
-        <button @click="offEditMode">취소</button>
+        <TheButton color="primary" @click="offEditMode(), editTodo()"
+          >확인</TheButton
+        >
+        <TheButton color="lightgrey" @click="offEditMode">취소</TheButton>
       </div>
     </template>
   </li>
 </template>
 
 <script>
+import TheButton from './TheBtn.vue';
+
 export default {
+  components: {
+    TheButton,
+  },
   props: {
     todo: Object,
   },
