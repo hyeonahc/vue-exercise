@@ -1,30 +1,33 @@
 <template>
   <input type="text" v-model="title" @keyup.enter="addTodo" />
   <ul>
-    <li v-for="todo in todos" :key="todo.id">
-      {{ todo.title }}
-      <template v-if="!editMode">
-        <button @click="changeMode">수정</button>
-        <button @click="deleteTodo(todo)">삭제</button>
-      </template>
-      <template v-else>
-        <input type="text" v-model="newTitle" />
-        <button @click="changeMode(), editTodo(todo)">확인</button>
-      </template>
-    </li>
+    <todoList
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
+      @edit-todo="todo.title = $event"
+      @delete-todo="deleteTodo"
+    ></todoList>
   </ul>
 </template>
 
 <script>
 import { nanoid } from 'nanoid';
+import todoList from './components/TodoList.vue';
 
 export default {
+  components: {
+    todoList,
+  },
   data() {
     return {
       title: '',
-      newTitle: '',
-      todos: [],
-      editMode: false,
+      todos: [
+        {
+          title: 'Hello World',
+          id: nanoid(),
+        },
+      ],
     };
   },
   methods: {
@@ -38,16 +41,9 @@ export default {
       });
       this.title = '';
     },
-    editTodo(todo) {
-      todo.title = this.newTitle;
-    },
     deleteTodo(todoToDelete) {
       const index = this.todos.findIndex(todo => todo.id === todoToDelete.id);
       this.todos.splice(index, 1);
-    },
-    changeMode() {
-      this.editMode = !this.editMode;
-      console.log(this.editMode);
     },
   },
 };
