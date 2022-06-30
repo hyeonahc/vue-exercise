@@ -1,7 +1,17 @@
 <template>
   <input type="text" v-model="title" @keyup.enter="addTodo" />
   <ul>
-    <li v-for="todo in todos" :key="todo.id">{{ todo.title }}</li>
+    <li v-for="todo in todos" :key="todo.id">
+      {{ todo.title }}
+      <template v-if="!editMode">
+        <button @click="changeMode">수정</button>
+        <button>삭제</button>
+      </template>
+      <template v-else>
+        <input type="text" v-model="newTitle" />
+        <button @click="changeMode(), editTodo(todo)">확인</button>
+      </template>
+    </li>
   </ul>
 </template>
 
@@ -12,7 +22,14 @@ export default {
   data() {
     return {
       title: '',
-      todos: [],
+      newTitle: '',
+      todos: [
+        {
+          title: 'hello world',
+          id: nanoid(),
+        },
+      ],
+      editMode: false,
     };
   },
   methods: {
@@ -22,6 +39,13 @@ export default {
         id: nanoid(),
       });
       this.title = '';
+    },
+    editTodo(todo) {
+      todo.title = this.newTitle;
+    },
+    changeMode() {
+      this.editMode = !this.editMode;
+      console.log(this.editMode);
     },
   },
 };
