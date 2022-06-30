@@ -2,12 +2,22 @@
   <li>
     <template v-if="!editMode">
       {{ todo.title }}
-      <button @click="onEditMode">수정</button>
+      <button @click.stop="onEditMode">수정</button>
       <button @click="deleteTodo()">삭제</button>
     </template>
     <template v-else>
-      <input type="text" :value="title" @input="title = $event.target.value" />
-      <button @click="offEditMode(), editTodo()">확인</button>
+      <div @click.stop>
+        <input
+          ref="inputTitle"
+          type="text"
+          :value="title"
+          @input="title = $event.target.value"
+          @keydown.enter="offEditMode(), editTodo()"
+          @keydown.esc="offEditMode"
+        />
+        <button @click="offEditMode(), editTodo()">확인</button>
+        <button @click="offEditMode">취소</button>
+      </div>
     </template>
   </li>
 </template>
@@ -24,14 +34,16 @@ export default {
     };
   },
   methods: {
-    onEditMode() {
-      console.log('on');
+    async onEditMode() {
       this.editMode = true;
       this.title = this.todo.title;
+      window.addEventListener('click', this.offEditMode);
+      await this.$nextTick();
+      this.$refs.inputTitle.focus();
     },
     offEditMode() {
-      console.log('off');
       this.editMode = false;
+      window.removeEventListener('click', this.offEditMode);
     },
     editTodo() {
       this.$emit('edit-todo', this.title);

@@ -1,5 +1,5 @@
 <template>
-  <input type="text" v-model="title" @keyup.enter="addTodo" />
+  <input type="text" v-model="title" @keydown.enter="addTodo" />
   <ul>
     <todoList
       v-for="todo in todos"
