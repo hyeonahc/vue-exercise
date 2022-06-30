@@ -37,4 +37,9 @@
 
 ### 5. 리스트 수정해주기
 
-1. li를 todoItem 컴포넌트로 만들어 캡슐화 작업해주기
+1. li를 todoList 컴포넌트로 만들어 캡슐화 작업해주기
+2. todos 배열 안에 있는 객체 todo를 todoList 컴포넌트의 props로 전달해주기
+3. editMode 데이터, onEditMode, offEditMode 메서드 생성해주기
+4. editTodo, deleteTodo 메서드 생성해주기
+5. editTodo와 deleteTodo 메서드는 상위 컴포넌트에 있는 데이터를 수정하므로 이벤트를 상속시켜주는 emit을 사용해준다
+6. editTodo는 상위 컴포넌트에 데이터 title을 넘겨주고 deleteTodo는 해당 객체 todo를 넘겨준다
