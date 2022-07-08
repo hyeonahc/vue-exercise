@@ -13,7 +13,7 @@
       MyPage
     </RouterLink>
     <RouterLink to="/">
-      SignIn
+      SignOut
     </RouterLink>
   </header>
 </template>
