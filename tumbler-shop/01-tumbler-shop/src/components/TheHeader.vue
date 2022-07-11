@@ -4,7 +4,7 @@
     <RouterLink to="/">
       MainPage
     </RouterLink>
-    <span v-if="!isLogin">
+    <span v-if="!isLogIn">
       <RouterLink to="/signup">
         SignUp
       </RouterLink>
