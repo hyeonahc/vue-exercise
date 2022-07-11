@@ -4,8 +4,7 @@
       :value="displayName"
       placeholder="이름을 입력해주세요" 
       type="text"
-      @input="displayName = $event.target.value"
-      @keydown.enter="signUp" />
+      @input="displayName = $event.target.value" />
   </div>
   <div>
     <input
@@ -17,7 +16,8 @@
     <input
       v-model="password"
       type="text"
-      placeholder="비밀번호를 입력해주세요" />
+      placeholder="비밀번호를 입력해주세요" 
+      @keydown.enter="signUp" />
   </div>
   <button @click="signUp">
     회원가입
