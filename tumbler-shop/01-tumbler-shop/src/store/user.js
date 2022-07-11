@@ -68,6 +68,17 @@ export default {
         alert(err)
       }
     },
+    // 3. 로그아웃
+    async signOut({ commit }) {
+      await publicRequest({
+        url: 'auth/logout',
+        method: 'POST'
+      }),
+      commit('updateState', {
+        user: {},
+        isLogIn: false
+      })
+    },
     // 4. 상태 업데이트 요청
     requestUpdateState({ commit }, payload = {}) {
       commit('updateState', payload)

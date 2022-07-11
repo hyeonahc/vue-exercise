@@ -16,7 +16,9 @@
       <RouterLink to="/mypage">
         MyPage
       </RouterLink>
-      <RouterLink to="/">
+      <RouterLink
+        to="/"
+        @click="signOut">
         SignOut
       </RouterLink>
     </span>
@@ -24,7 +26,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 // mapState: store에 저장된 state를 배열로 등록해주는 함수
 // mapState('스토어이름', [state에 등록한 데이터이름...])
 // mapActions: store에 저장된 actions를 배열로 등록해주는 함수
@@ -34,6 +36,14 @@ export default {
   computed: {
     ...mapState('user', ['isLogIn'])
   },
+  methods: {
+    ...mapActions('user', {
+      useSignOut: 'signOut'
+    }),
+    signOut() {
+      this.useSignOut()
+    }
+  }
 }
 </script>
 
