@@ -67,6 +67,10 @@ export default {
       } catch(err) {
         alert(err)
       }
+    },
+    // 4. 상태 업데이트 요청
+    requestUpdateState({ commit }, payload = {}) {
+      commit('updateState', payload)
     }
   }
 }
