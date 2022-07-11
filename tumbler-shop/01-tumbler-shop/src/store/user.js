@@ -12,10 +12,11 @@ export default {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
       })
-      console.log('this.state: ', this.state)
+      console.log('this.state.user.user: ', this.state.user.user, 'this.state.user.isLogIn: ', this.state.user.isLogIn)
     }
   },
   actions: {
+    // 1. 회원가입
     async signUp({ commit }, payload = {}) {
       try {
         console.log('payload: ', payload)
@@ -39,6 +40,31 @@ export default {
           alert('이미 존재하는 사용자 정보입니다')
         }
       } catch (err) {
+        alert(err)
+      }
+    },
+    // 2. 로그인
+    async signIn({ commit }, payload = {} ) {
+      try {
+        const { user, accessToken } = await publicRequest({
+          url: 'auth/login',
+          method: 'POST',
+          body: {
+            ...payload
+          }
+        })
+        // user와 accessToekn 값을 받아왔다는 것은 로그인이 된 상태를 의미한다
+        if(user && accessToken) {
+          console.log('user: ', user)
+          console.log('accessToken: ', accessToken)
+          window.localStorage.setItem('token', accessToken)
+          // 로그인한 새로운 user 정보를 저장, isLogin: true로 설정
+          commit('updateState', {
+            user,
+            isLogIn: true
+          })
+        }
+      } catch(err) {
         alert(err)
       }
     }
